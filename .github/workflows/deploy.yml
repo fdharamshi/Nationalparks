@@ -29,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Build (relative base for Pages)
+        run: npm run build -- --base=./
 
       - name: Add SPA fallback
         run: cp dist/index.html dist/404.html
