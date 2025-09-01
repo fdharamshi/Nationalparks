@@ -15,6 +15,7 @@ html, body, #root { height: 100%; }
   padding: 10px 14px;
   border-radius: 12px;
   backdrop-filter: blur(6px);
+  width: min(92vw, 900px);
 }
 .timeline .play {
   border: none;
@@ -24,15 +25,8 @@ html, body, #root { height: 100%; }
   border-radius: 8px;
   cursor: pointer;
 }
-.timeline input[type="range"] {
-  width: 48vw;
-}
-.timeline .label {
-  white-space: nowrap;
-  max-width: 32vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.timeline input[type="range"] { flex: 1; min-width: 160px; }
+.timeline .label { white-space: nowrap; max-width: 50%; overflow: hidden; text-overflow: ellipsis; }
 
 .place { color: #333; font-size: 14px; }
 
