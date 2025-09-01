@@ -1,5 +1,5 @@
 html, body, #root { height: 100%; }
-.app { position: relative; min-height: 100vh; }
+.app { position: relative; height: 100vh; }
 .map-root { height: 100%; width: 100%; }
 
 .timeline {
