@@ -1,4 +1,4 @@
-name: Deploy (classic gh-pages branch)
+name: Deploy (classic main/docs)
 
 on:
   push:
@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Build (relative base)
+        run: npm run build -- --base=./
 
       - name: Add SPA fallback
         run: cp dist/index.html dist/404.html
@@ -32,8 +32,16 @@ jobs:
       - name: Disable Jekyll on Pages
         run: touch dist/.nojekyll
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+      - name: Prepare docs folder
+        run: |
+          mkdir -p docs
+          rm -rf docs/*
+          cp -R dist/* docs/
+
+      - name: Commit and push docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "deploy: update docs folder" || echo "No changes to commit"
+          git push
